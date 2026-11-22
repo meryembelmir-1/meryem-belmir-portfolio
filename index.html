@@ -50,7 +50,7 @@
     <section id="projects" aria-labelledby="projects-heading">
       <h2 id="projects-heading">Projects</h2>
       <div class="cards">
-        <article class="card">
+        <article class="card" data-reveal>
           <h3>Phishing Campaign Simulator</h3>
           <p>Modular Python tool to assess staff awareness against social engineering, with a campaign tracking dashboard.</p>
           <ul class="tags">
@@ -62,7 +62,7 @@
           <a class="repo-link" href="https://github.com/meryembelmir-1/phishing-campaign-simulator" target="_blank" rel="noopener noreferrer">View repository</a>
         </article>
 
-        <article class="card">
+        <article class="card" data-reveal>
           <h3>Active Directory Lab with Integrated SOC</h3>
           <p>AD lab attacked with 4 MITRE ATT&amp;CK techniques (LLMNR Poisoning, Kerberoasting, DCSync, Golden Ticket), with detection rules written in Wazuh and validated in real time.</p>
           <ul class="tags">
@@ -76,7 +76,7 @@
           <a class="repo-link" href="https://github.com/meryembelmir-1/ad-soc-wazuh-lab" target="_blank" rel="noopener noreferrer">View repository</a>
         </article>
 
-        <article class="card">
+        <article class="card" data-reveal>
           <h3>Reverse Engineering of an Android Forensic Acquisition Agent</h3>
           <p>Static (JADX) and dynamic (ADB/Logcat) analysis of a mobile forensic agent on Android 14.</p>
           <ul class="tags">
@@ -87,7 +87,7 @@
           <a class="repo-link" href="https://github.com/meryembelmir-1/android-forensic-agent-re" target="_blank" rel="noopener noreferrer">View repository</a>
         </article>
 
-        <article class="card">
+        <article class="card" data-reveal>
           <h3>Remote Access Hardening and SSH Bastion Architecture</h3>
           <p>Hardened an Ubuntu server with Ed25519 key authentication, no root or password login, and a ProxyJump bastion with strict firewall rules; verified with ssh-audit, Nmap, Hydra brute-force simulation, auth.log analysis and Wireshark, with fail2ban blocking after 3 attempts and the internal server having no direct external exposure.</p>
           <ul class="tags">
@@ -104,14 +104,14 @@
 
     <section id="experience" aria-labelledby="experience-heading">
       <h2 id="experience-heading">Experience</h2>
-      <div class="entry">
+      <div class="entry" data-reveal>
         <p class="entry-date">Mar 2026 – Jul 2026</p>
         <div class="entry-body">
           <h3>Cybersecurity R&amp;D Intern</h3>
           <p class="meta">Tasmim Web, Casablanca</p>
         </div>
       </div>
-      <div class="entry">
+      <div class="entry" data-reveal>
         <p class="entry-date">Jul 2025 – Sep 2025</p>
         <div class="entry-body">
           <h3>Cybersecurity Intern</h3>
@@ -123,7 +123,7 @@
     <section id="skills" aria-labelledby="skills-heading">
       <h2 id="skills-heading">Skills</h2>
       <div class="skills-grid">
-        <div class="skill-group">
+        <div class="skill-group" data-reveal>
           <h3>Detection &amp; Monitoring</h3>
           <ul>
             <li>Wazuh</li>
@@ -133,7 +133,7 @@
             <li>Windows event log analysis</li>
           </ul>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-reveal>
           <h3>Analysis &amp; Forensics</h3>
           <ul>
             <li>JADX</li>
@@ -141,7 +141,7 @@
             <li>Oxygen Forensic Detective</li>
           </ul>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-reveal>
           <h3>Python &amp; ML</h3>
           <ul>
             <li>Python</li>
@@ -152,7 +152,7 @@
             <li>DuckDB</li>
           </ul>
         </div>
-        <div class="skill-group">
+        <div class="skill-group" data-reveal>
           <h3>Systems &amp; Networking</h3>
           <ul>
             <li>Windows Server</li>
@@ -165,7 +165,7 @@
 
     <section id="education" aria-labelledby="education-heading">
       <h2 id="education-heading">Education</h2>
-      <p><strong>ENSA Oujda</strong>, Cybersecurity Engineer, 2026</p>
+      <p data-reveal><strong>ENSA Oujda</strong>, Cybersecurity Engineer, 2026</p>
     </section>
   </main>
 
@@ -182,22 +182,45 @@
 
   <script>
     (function () {
-      var root = document.documentElement, btn = document.getElementById('theme-toggle');
-      var mq = matchMedia('(prefers-color-scheme: dark)'), saved = null;
-      try { saved = localStorage.getItem('theme'); } catch (e) {}
-      if (saved === 'dark' || saved === 'light') root.dataset.theme = saved;
-      function dark() { return root.dataset.theme ? root.dataset.theme === 'dark' : mq.matches; }
+      var r = document.documentElement, b = document.getElementById('theme-toggle');
+      var mq = matchMedia('(prefers-color-scheme: dark)'), s = null;
+      r.classList.add('js');
+      try { s = localStorage.getItem('theme'); } catch (e) {}
+      if (s === 'dark' || s === 'light') r.dataset.theme = s;
+      function dark() { return r.dataset.theme ? r.dataset.theme === 'dark' : mq.matches; }
       function sync() {
-        root.dataset.mode = dark() ? 'dark' : 'light';
-        btn.setAttribute('aria-label', 'Switch to ' + (dark() ? 'light' : 'dark') + ' mode');
+        r.dataset.mode = dark() ? 'dark' : 'light';
+        b.setAttribute('aria-label', 'Switch to ' + (dark() ? 'light' : 'dark') + ' mode');
       }
-      btn.onclick = function () {
-        root.dataset.theme = dark() ? 'light' : 'dark';
-        try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+      b.onclick = function () {
+        r.dataset.theme = dark() ? 'light' : 'dark';
+        try { localStorage.setItem('theme', r.dataset.theme); } catch (e) {}
         sync();
       };
-      mq.onchange = sync;
-      sync();
+      mq.onchange = sync; sync();
+
+      var links = [].slice.call(document.querySelectorAll('.topbar-links a'));
+      var items = [].slice.call(document.querySelectorAll('[data-reveal]'));
+      function onScroll() {
+        var max = document.body.scrollHeight - innerHeight;
+        r.style.setProperty('--progress', (max > 0 ? Math.min(scrollY / max, 1) : 0) * 100 + '%');
+        var active = links[0], line = scrollY + innerHeight * 0.35;
+        links.forEach(function (a) {
+          var sec = document.querySelector(a.hash);
+          if (sec && sec.getBoundingClientRect().top + scrollY <= line) active = a;
+        });
+        if (scrollY + innerHeight >= document.body.scrollHeight - 2) active = links[links.length - 1];
+        links.forEach(function (a) { a.classList.toggle('is-active', a === active); });
+      }
+      addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      items.forEach(function (el) { io.observe(el); });
     })();
   </script>
 </body>
